@@ -74,10 +74,10 @@
                             <a class="nav-link" href="{{ route('books') }}">Books</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('genres') }}">Genres</a>
+                            <a class="nav-link" href="{{ route('genres') }}">Genres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('authors') }}">Authors</a>
+                            <a class="nav-link active" href="{{ route('authors') }}">Authors</a>
                         </li>
                     </ul>
                 </div>

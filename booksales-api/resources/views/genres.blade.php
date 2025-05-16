@@ -91,12 +91,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($genres as $genre)
-                    <tr>
-                        <td>{{ $genre['name'] }}</td>
-                        <td>{{ $genre['description'] }}</td>
-                    </tr>
-                    @endforeach
+                @foreach ($genres as $item)
+            <tr>
+                <td>{{ $item['name'] }}</td>
+                <td>{{ $item['description'] }}</td>
+            </tr>
+            @endforeach
                 </tbody>
             </table>
         </div>

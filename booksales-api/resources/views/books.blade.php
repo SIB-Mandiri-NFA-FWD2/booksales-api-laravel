@@ -118,8 +118,8 @@
                         <td>{{ $book['description'] }}</td>
                         <td>{{ $book['price'] }}</td>
                         <td>{{ $book['stock'] }}</td>
-                        <td>{{ $book['genre'] }}</td>
-                        <td>{{ $book['author'] }}</td>
+                        <td>{{ $book['genres_name'] }}</td>
+                        <td>{{ $book['authors_name'] }}</td>
                         <td style="text-align: center;">
                             <button class="action-button"><i class="fa-solid fa-heart"></i></button>
                         </td>
