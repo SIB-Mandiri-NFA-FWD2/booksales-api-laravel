@@ -26,6 +26,10 @@ class BookController extends Controller
             })
             ->toArray();
 
-        return view('books', ['books' => $books]);
+            return response()->json([
+                "success" => true,
+                "message" => "Get All Resource",
+                "data" => $books
+            ], 200);  
     }
 }

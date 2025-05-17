@@ -9,6 +9,10 @@ class AuthorController extends Controller
     public function index(){
         $author = Authors::all();
         
-        return view('authors', ['authors' => $author]);
+        return response()->json([
+            "success" => true,
+            "message" => "Get All Resource",
+            "data" => $author
+        ], 200);
     }
 }
