@@ -69,4 +69,86 @@ class BookController extends Controller
                 "data" => $book
         ], 201); 
     }
+
+    public function show($id){
+        $books = Books::find($id);
+
+        if (!$books) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Buku tidak ditemukan'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail buku ditemukan',
+            'data' => $books
+        ], 200);
+    }
+
+    public function update(Request $request, $id){
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|max:100',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
+            'cover_photo' => 'required|image|mimes:jpeg,jpg,png|max:2048',
+            'genre_id' => 'required|exists:genres,id',
+            'author_id' => 'required|exists:authors,id',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => $validator->errors()
+            ], 422);
+        }
+
+        $books = Books::find($id);
+
+        if (!$books) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Buku tidak ditemukan'
+            ], 404);
+        }
+
+        $image = $request->file('cover_photo');
+        $image->store('books', 'public');
+
+        $books->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'cover_photo' => $image->hashName(),
+            'genre_id' => $request->genre_id,
+            'author_id' => $request->author_id,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Data berhasil diperbarui',
+            'data' => $books
+        ], 201);
+    }
+
+    public function destroy($id){
+        $books = Books::find($id);
+
+        if (!$books) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Buku tidak ditemukan'
+            ], 404);
+        }
+
+        $books->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Buku berhasil dihapus'
+        ], 200);
+    }
 }
